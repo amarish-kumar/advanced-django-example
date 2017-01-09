@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from models import Categoria, Enlace
+from models import Categoria, Enlace, Agregador
 from actions import export_as_csv_action
 
 class EnlaceAdmin(admin.ModelAdmin):
@@ -11,6 +11,7 @@ class EnlaceAdmin(admin.ModelAdmin):
     list_editable = ('titulo', 'enlace', 'categoria',)
     list_display_links = ('es_popular',)
     actions = [export_as_csv_action]
+    raw_id_fields = ('categoria', 'usuario',)
 
     def imagen_voto(self, obj):
         url = obj.mis_votos_en_imagen_rosada()
@@ -20,6 +21,18 @@ class EnlaceAdmin(admin.ModelAdmin):
     imagen_voto.allow_tags = True
     imagen_voto.admin_order_field = 'votos'
 
+class EnlaceInline(admin.StackedInline):
+    model = Enlace
+    raw_id_fields = ('usuario',)
+    extra = 1
 
-admin.site.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    actions = [export_as_csv_action]
+    inlines = [EnlaceInline]
+
+class AgregadorAdmin(admin.ModelAdmin):
+    filter_horizontal = ('enlaces',)
+
+admin.site.register(Agregador, AgregadorAdmin)
+admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Enlace, EnlaceAdmin)
