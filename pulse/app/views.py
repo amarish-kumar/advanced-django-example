@@ -15,14 +15,14 @@ def home(request):
     categorias = Categoria.objects.all()
     enlaces = Enlace.objects.order_by('-votos').all()
     template = "index.html"
-    return render_to_response(template, locals())
+    return render(request, template, locals())
 
 def categoria(request, categoria_id):
     categorias = Categoria.objects.all()
     cat = get_object_or_404(Categoria, pk = categoria_id)
     enlaces = Enlace.objects.filter(categoria = cat)
     template = "index.html"
-    return render_to_response(template, locals())
+    return render(request, template, locals())
 
 @login_required
 def minus(request, enlace_id):
