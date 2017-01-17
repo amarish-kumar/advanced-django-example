@@ -52,10 +52,17 @@ def add(request):
         form = EnlaceForm()
 
     template = "form.html"
-
-    ##########################
-    # DEPRECATED in Django 1.8################################################################
-    # return render_to_response(template, context_instance = RequestContext(request,locals()))
-    ##########################################################################################
-
     return render(request, template, locals())
+
+from django.views.generic import ListView, DetailView
+
+class EnlaceListView(ListView):
+    model = Enlace
+    context_object_name = 'enlaces'
+    def get_template_names(self):
+        return 'index.html'
+
+class EnlaceDetailView(DetailView):
+        model = Enlace
+        def get_template_names(self):
+            return 'index.html'

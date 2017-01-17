@@ -16,8 +16,8 @@ class PaisMiddleware(object):
 
         pais = de_donde_vengo(request)
 
-        if pais == 'Mexico':
-            return redirect('http://mojorando.la')
+        # if pais == 'Mexico':
+        #    return redirect('http://www.google.com')
 
         response = self.get_response(request)
 
