@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot');
-	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.woff') format('woff'),
-		url('fonts/icomoon.ttf') format('truetype'),
-		url('fonts/icomoon.svg#icomoon') format('svg');
+	src:url('./fonts/icomoon.eot');
+	src:url('./fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/icomoon.woff') format('woff'),
+		url('./fonts/icomoon.ttf') format('truetype'),
+		url('./fonts/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -129,7 +129,7 @@ nav #publicar_nav
 	/*i is zorri*/
 	background: #DD4F24;
 	float: right;
-	margin-right: 0; 
+	margin-right: 0;
 	padding-right: 1em;
 	position: relative;
 }
@@ -265,12 +265,3 @@ nav #publicar_nav a
 	color: green;
 	content: "\e002";
 }
-
-
-
-
-
-
-
-
-

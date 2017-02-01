@@ -1,0 +1,9 @@
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+
+Debug = False
+
+ALLOWED_HOSTS = ['*']
+
+use TEMPLETE_TAG static
+
+Do python manage.py collectstatic

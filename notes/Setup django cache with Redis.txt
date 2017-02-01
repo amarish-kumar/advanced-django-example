@@ -1,0 +1,31 @@
+## Install cache's backend and parser 
+
+pip install django-redis-cache
+pip install hiredis
+
+## Run redis on a diferent terminal
+redis-server 
+
+## Set cache configuration on settings.py
+
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.RedisCache",
+        "LOCATION": "localhost:6379",
+        "OPTIONS": {
+            # "CLIENT_CLASS": "django_redis.client.DefaultClient",
+	      "PARSER_CLASS": "redis.connection.HiredisParser"
+        },
+        "KEY_PREFIX": "example"
+    }
+}
+
+## Test redis is working
+python manage.py shell
+
+from django.core.cache import cache
+
+cache.set('number', 2)
+#True
+cacha.get('number')
+#2

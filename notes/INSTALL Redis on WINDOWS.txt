@@ -1,0 +1,13 @@
+# I'm using Powershell and choco as package gestor. See https://chocolatey.org for details.
+# For install redis type on shell the following
+
+choco install redis-64
+
+# For starting redis server type 
+
+redis-server 
+
+# For comunicate with the server type
+
+redis-cli
+

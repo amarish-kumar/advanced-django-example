@@ -14,14 +14,14 @@ from forms import EnlaceForm
 def home(request):
     categorias = Categoria.objects.all()
     enlaces = Enlace.objects.order_by('-votos').all()
-    template = "index.html"
+    template = "app/index.html"
     return render(request, template, locals())
 
 def categoria(request, categoria_id):
     categorias = Categoria.objects.all()
     cat = get_object_or_404(Categoria, pk = categoria_id)
     enlaces = Enlace.objects.filter(categoria = cat)
-    template = "index.html"
+    template = "app/index.html"
     return render(request, template, locals())
 
 @login_required
@@ -51,7 +51,7 @@ def add(request):
     else:
         form = EnlaceForm()
 
-    template = "form.html"
+    template = "app/form.html"
     return render(request, template, locals())
 
 from django.views.generic import ListView, DetailView
@@ -60,12 +60,12 @@ class EnlaceListView(ListView):
     model = Enlace
     context_object_name = 'enlaces'
     def get_template_names(self):
-        return 'index.html'
+        return 'app/index.html'
 
 class EnlaceDetailView(DetailView):
         model = Enlace
         def get_template_names(self):
-            return 'index.html'
+            return 'app/index.html'
 
 from .serializers import EnlaceSerializer, UserSerializer
 from rest_framework import viewsets

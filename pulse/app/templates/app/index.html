@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,10 +9,10 @@
 		  content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 	<title>Puls3: Comunidad online de gente pro y (no sé que más escribir)</title>
-	<link rel="stylesheet" href="normalize.css" />
+	<link rel="stylesheet" href="{% static 'app/normalize.css' %}"/>
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
-	<link rel="stylesheet" href="/static/estilos.css" />
-	<link rel="stylesheet" href="/static/responsive.css" />
+	<link rel="stylesheet" href="{% static 'app/estilos.css' %}"/>
+	<link rel="stylesheet" href="{% static 'app/responsive.css' %}"/>
 </head>
 <body>
 	<!-- comentario de lo que sea -->
@@ -26,7 +28,7 @@
 	</header>
 
 	{% include "menu.html" %}
-	
+
 	<aside id="bienvenida">
 	    {% if not request.user.is_authenticated %}
 		<h2>Hola, registrate!</h2>
