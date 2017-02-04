@@ -38,3 +38,14 @@ class Agregador(models.Model):
 
     def __unicode__(self):
         return self.titulo
+
+# For clear cache when anyone object is inserted
+from django.core.cache import cache
+from django.db.models.signals import post_save
+from django.contrib.sessions.models import Session
+from django.dispatch import receiver
+
+@receiver(post_save)
+def clear_cache(sender, **kwargs):
+    if sender != Session:
+	cache.clear()

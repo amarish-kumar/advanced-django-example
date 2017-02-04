@@ -1,0 +1,44 @@
+------
+Tip 1
+------
+
+DEBUG = False
+
+----------------
+Tip 2 Sessions
+----------------
+# put in settings.py
+
+# Para no darle tan duro a la base de datos
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
+# Aun mas agresivo - If doesn't matter to lose the session
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+-------------------------------------------------------
+Tip 3 Cache everything: Guarda todo el sitio en cache
+-------------------------------------------------------
+MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
+	.......
+	.......
+     'django.middleware.cache.FetchFromCacheMiddleware',
+)
+
+# Para que funcione solamente con usuarios no registrados
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+
+--------------------------------------------------------------------------------------
+Tip 4 Cache refresh: Automaticamente cuando se cree un nuevo obj en db se borra el cache
+--------------------------------------------------------------------------------------
+# put it in models.py
+
+from django.core.cache import cache
+from django.db.models.signals import post_save
+from djangp.contrib.sessions.models import Session
+from django.dispatch import receiver
+
+@receiver(post_save)
+def clear_cache(sender, **kwargs):
+    if sender != Session:
+	cache._cache.flush_all()

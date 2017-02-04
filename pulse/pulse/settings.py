@@ -27,7 +27,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-
+# Session cached
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # begin cache middleware
+    'django.middleware.cache.UpdateCacheMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,7 +60,12 @@ MIDDLEWARE = [
     # middleware for allow CORS
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # end cache middleware
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+# Para que funcione el cache de todo el sitio solamente con usuarios no registrados
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 ROOT_URLCONF = 'pulse.urls'
 
@@ -152,7 +161,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
 
 
 ## Cache redis
