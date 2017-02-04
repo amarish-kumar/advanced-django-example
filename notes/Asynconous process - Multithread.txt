@@ -1,0 +1,46 @@
+pip install -U celery-with-redis
+pip install django-celery
+
+## Asyncronous procces: Celery
+
+## Put this in settings.py
+
+import djcelery
+
+djcelery.setup_loader()
+
+BROKER_URL = 'redis://localhost:6379'
+
+## create tasks.py
+## put this
+from celery import task
+
+@task 
+def calculo():
+    j = 1
+    for i in xrange(50000):
+        if j % 2 and i:
+            j *= i
+        else:
+            j += i
+    print j
+
+## Run celery deamon with DEBUG
+python manage.py celeryd --loglevel=DEBUG
+
+------------------
+Scheduled task 
+------------------
+
+from celery.decorators import periodic_task
+from celery.task.schedules import crontab
+
+@periodic_task(run_every=crontab(minute=5, hour=0))
+def calculo():
+    j = 1
+    for i in xrange(50000):
+        if j % 2 and i:
+            j *= i
+        else:
+            j += i
+    print j

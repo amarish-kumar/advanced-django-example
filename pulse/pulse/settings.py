@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'app',
     # app for allow CORS
     'corsheaders',
+    # Celery for Asyncronous proccesses
+    'djcelery',
 ]
 
 MIDDLEWARE = [
     # begin cache middleware
-    'django.middleware.cache.UpdateCacheMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,7 +63,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     # end cache middleware
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 # Para que funcione el cache de todo el sitio solamente con usuarios no registrados
@@ -163,6 +165,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 
+
 ## Cache redis
 
 CACHES = {
@@ -179,3 +182,8 @@ CACHES = {
 
 ## Django CORS origin
 CORS_ORIGIN_ALLOW_ALL = True
+
+## Asyncronous procces: Celery
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379'
