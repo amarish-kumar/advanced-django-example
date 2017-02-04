@@ -4,6 +4,7 @@ from django.template import Context
 from django.template.loader import get_template
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
 
 from datetime import datetime
 from models import Categoria, Enlace
@@ -11,6 +12,7 @@ from forms import EnlaceForm
 
 # Create your views here.
 
+# @cache_page(6000) 
 def home(request):
     categorias = Categoria.objects.all()
     enlaces = Enlace.objects.order_by('-votos').all()

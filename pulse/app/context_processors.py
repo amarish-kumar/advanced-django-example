@@ -1,10 +1,17 @@
 from random import choice
 from django.urls import reverse
+from django.core.cache import cache
 
 frases = ['I have to learn advanced Django', 'Also, I have to practice English', 'But I am hungry right now']
 
 def ejemplo(request):
-    return {'frase': choice(frases)}
+    frase = cache.get('frase_cool')
+
+    if frase is None:
+        frase = choice(frases)
+        cache.set('frase_cool', frase)
+
+    return {'frase' : frase}
 
 def menu(request):
     menu = {'menu' : [

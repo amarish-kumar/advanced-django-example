@@ -1,0 +1,5 @@
+{% load cache %}
+
+{% cache 6000 'enlaces_home' %}
+
+{% endcache %}

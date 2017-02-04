@@ -1,0 +1,10 @@
+step 1
+-------
+from django.views.decorators.cache import cache_page
+
+step 2
+-------
+@cache_page(6000)
+
+def home(request):
+ ....

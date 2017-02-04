@@ -1,0 +1,37 @@
+# Go to web site for more details
+# https://github.com/zestedesavoir/django-cors-middleware
+
+Step 1
+--------
+pip install django-cors-middleware
+
+Step 2
+--------
+# and then add it to your installed apps:
+INSTALLED_APPS = (
+    ...
+    'corsheaders',
+    ...
+)
+
+Step 3
+--------
+# You will also need to add a middleware class to listen in on responses:
+# Use `MIDDLEWARE_CLASSES` prior to Django 1.10
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...
+]
+
+Step 4
+--------
+CORS_ORIGIN_WHITELIST = (
+    'google.com',
+    'hostname.example.com'
+)
+
+# OR for allow all
+
+CORS_ORIGIN_ALLOW_ALL = False

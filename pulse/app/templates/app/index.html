@@ -39,6 +39,8 @@
 				Hola, {{request.user}}
 		{% endif %}
 	</aside>
+	{% load cache %}
+	{% cache 6000 'enlaces_home' %}
 	<section id="contenido">
 	    {% if enlaces %}
 
@@ -69,6 +71,7 @@
 		    NO HAY ENLACES GUARDADOS
 		{% endif %}
 	</section>
+	{% endcache %}
 	<footer>
 		<p><strong>Powered by Platzi! {{ frase }}</strong></p>
 		<p>Mejorando.la 2013 ®</p>
