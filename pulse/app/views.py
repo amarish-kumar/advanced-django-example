@@ -45,7 +45,7 @@ def plus(request, enlace_id):
 @login_required
 def add(request):
     if request.method == "POST":
-        form = EnlaceForm(request.POST)
+        form = EnlaceForm(request.POST, request.FILES)
         if form.is_valid():
             enlace = form.save(commit = False)
             enlace.usuario = request.user

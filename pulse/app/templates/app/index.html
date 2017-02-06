@@ -27,7 +27,7 @@
 		</figure>
 	</header>
 
-	{% include "menu.html" %}
+	{% include "app/menu.html" %}
 
 	<aside id="bienvenida">
 	    {% if not request.user.is_authenticated %}
@@ -70,7 +70,7 @@
 		    NO HAY ENLACES GUARDADOS
 		{% endif %}
 	</section>
-	
+
 	<footer>
 		<p><strong>Powered by Platzi! {{ frase }}</strong></p>
 		<p>Mejorando.la 2013 ®</p>

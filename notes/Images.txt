@@ -1,0 +1,16 @@
+### Step 1
+###Put this attribute in the <div>, into the template 
+enctype="multipart/form-data"
+
+## and it will look like  
+
+<div id="form" enctype="multipart/form-data">
+</div>
+
+# Step 2
+## then, in the view method change
+form = EnlaceForm(request.POST)
+# for
+form = EnlaceForm(request.POST, request.FILES)
+
+

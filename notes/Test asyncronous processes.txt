@@ -1,0 +1,6 @@
+### For testing asyncronous processes
+### Put this in settings.py
+
+TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
+CELERY_ALWAYS_EAGER = True
+BROKER_BACKEND = 'memory'

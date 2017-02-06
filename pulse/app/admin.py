@@ -5,7 +5,7 @@ from models import Categoria, Enlace, Agregador
 from actions import export_as_csv_action
 
 class EnlaceAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'enlace', 'categoria', 'imagen_voto', 'es_popular',)
+    list_display = ('titulo', 'enlace', 'categoria', 'imagen_voto', 'es_popular','imagen_post')
     list_filter = ('categoria', 'usuario',)
     search_fields = ('categoria__titulo','usuario__email',)
     list_editable = ('titulo', 'enlace', 'categoria',)
@@ -18,7 +18,13 @@ class EnlaceAdmin(admin.ModelAdmin):
         tag = '<img src="%s">' % url
         return tag
 
+    def imagen_post(self, obj):
+        url = obj.imagen
+        tag = '<img src="%s">' % url
+        return tag
+
     imagen_voto.allow_tags = True
+    # imagen_post.allow_tags = True
     imagen_voto.admin_order_field = 'votos'
 
 class EnlaceInline(admin.StackedInline):
